@@ -219,19 +219,19 @@ export async function CoolInput(text, buttons, input, css) {
             reject(`Coolalert: Invalid parameter: ${typeof buttons}`);
         }
         if (typeof input === "undefined") {
-            console.warn('Coolalert: Buttons are undefined');
+            console.warn('Coolalert: inputs are undefined');
             input = {
                 placholder: "input",
                 name: "input",
             };
-        } else if (typeof buttons !== 'object') {
-            console.error(`Coolalert: Invalid parameter: ${typeof buttons}`);
-            reject(`Coolalert: Invalid parameter: ${typeof buttons}`);
+        } else if (typeof input !== 'object') {
+            console.error(`Coolalert: Invalid parameter: ${typeof input}`);
+            reject(`Coolalert: Invalid parameter: ${typeof input}`);
         }
     
         // Create a container for the alert
         const container = document.createElement('div');
-        if (typeof text !== "undefined") {
+        if (typeof text !== undefined) {
             // Create paragraph for text
             const paragraph = document.createElement('p');
             paragraph.innerHTML = text;
@@ -247,16 +247,39 @@ export async function CoolInput(text, buttons, input, css) {
         const Input = document.createElement('input');
         Input.classList.add('coolalert--input');
         Input.style.marginBottom = '10px';
-        if(input.placholder !== "undefined"){
-            Input.placeholder = input.placholder;
+        if(input.placeholder !== undefined){
+            Input.placeholder = input.placeholder;
+        }
+        if(input.name !== undefined){
+            Input.name= input.name;
+        }
+        if(input.type !== undefined){
+            Input.type = input.type;
+        }
+        if(input.className !== undefined){
+            Input.classList.add(input.className);
+        }
+        if(input.readOnly !== undefined && input.readOnly == true){
+            Input.readOnly = 'true';
+        }
+        if(input.id !== undefined){
+            Input.id = input.id;
+        }
+        if(input.value !==undefined){
+            Input.value = input.value;
+        }
+        if(input.size !==undefined){
+            Input.size = input.size;
+        }
+        if(input.max !==undefined){
+            Input.max = input.max;
+        }
+        if(input.min !==undefined){
+            Input.min = input.min
+        }
 
-        }
-        if(input.name !=='undefined'){
-            Input.name= input.placeholder
-        }
-        if(input.type !=='undefined'){
-            Input.type = input.type
-        }
+
+        
         container.appendChild(Input);
         container.appendChild(document.createElement('br'));
         // Create OK button
